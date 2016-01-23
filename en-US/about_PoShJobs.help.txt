@@ -1,0 +1,243 @@
+﻿TOPIC
+    about_PoShJobs
+
+SHORT DESCRIPTION
+    Provides information about how PoShAdmin background jobs run a command
+    in the background without interacting with the current session. 
+
+LONG DESCRIPTION
+    This topic explains how to run background jobs with PoShAdmin on a local
+    computer. 
+    
+    When you start a background job, the command prompt returns immediately,
+    even if the job takes an extended time to complete. You can continue to 
+    work in the session without interruption while the job runs. 
+
+
+THE JOB CMDLETS
+
+    Start-PoShJob    Starts a background job on a local computer.
+
+    Get-PoShJob      Gets the background jobs that were started in the current 
+                     session.
+
+    Receive-PoShJob  Gets the results of background jobs.
+
+    Stop-PoShJob     Stops a background job.
+
+    Wait-PoShJob     Suppresses the command prompt until one or all jobs are 
+                     complete.
+
+    Remove-PoShJob   Deletes a background job.
+
+
+
+HOW TO START A JOB ON THE LOCAL COMPUTER
+
+    To start a background job on the local computer, use the Start-PoShJob 
+    cmdlet. 
+
+    To write a Start-PoShJob command, enclose the command that the job runs in 
+    braces ( { } ). Use the ScriptBlock parameter to specify the command.
+
+    The following command starts a background job that runs a Get-Process 
+    command on the local computer.
+
+        Start-PoShJob -ScriptBlock {Get-Process}
+
+
+    The Start-PoShJob command returns an object that represents the job. The job 
+    object contains useful information about the job, but it does not contain 
+    the job results.
+    
+    Save the job object in a variable, and then use it with the other PoShJob 
+    cmdlets to manage the background job. The following command starts a job 
+    object and saves the resulting job object in the $job variable.
+
+        $job = Start-PoShJob -ScriptBlock {Get-Process}
+          
+    You can also use the Get-PoShJob cmdlet to get objects that represent the jobs 
+    started in the current session. Get-PoShJob returns the same job object that 
+    Start-PoShJob returns.
+
+ 
+ GETTING JOB OBJECTS
+
+    To get object that represent the background jobs that were started in the 
+    current session, use the Get-PoShJob cmdlet. Without parameters, Get-PoShJob 
+    returns all of the jobs that were started in the current session.
+
+    For example, the following command gets the jobs in the current session.
+
+        PS C:\>Get-PoShJob
+
+            State         Id Name            InstanceId
+            -----         -- ----            ----------
+          Running          0 Job0            a47b1232-09d7-4a8a-b617-7f6e0fad5077
+
+    You can also save the job object in a variable and use it to represent the 
+    job in a later command. The following command gets the job with ID 1 and 
+    saves it in the $job variable.
+
+       $job = Get-PoShJob -Id 1  
+
+
+    The job object contains the state of the job, which indicates whether the 
+    job has finished. A finished job has a state of "Completed" or "Failed". A 
+    job might also be notStarted or running.
+
+
+Get-PoShJob
+
+
+            State         Id Name            InstanceId
+            -----         -- ----            ----------
+        Completed          0 Job0            a47b1232-09d7-4a8a-b617-7f6e0fad5077
+
+
+
+ GETTING THE RESULTS OF A JOB
+
+    When you run a background job, the results do not appear immediately. 
+    Instead, the Start-PoShJob cmdlet returns a job object that represents the 
+    job, but it does not contain the results. To get the results of a 
+    background job, use the Receive-PoShJob cmdlet.
+
+    The following command uses the Receive-PoShJob cmdlet to get the results of 
+    the job. It uses a job object saved in the $job variable to identify the 
+    job.
+
+Receive-PoShJob -PoShJob $job
+
+     The Receive-PoShJob cmdlet returns the results of the job. 
+
+
+           Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)    Id ProcessName
+           -------  ------    -----      ----- -----   ------    -- -----------
+               103       4    11328       9692    56           1176 audiodg
+               804      14    12228      14108   100   101.74  1740 CcmExec
+               668       7     2672       6168   104    32.26   488 csrss
+   ...
+
+     You can also save the results of a job in a variable. The following 
+     command saves the results of the job in the $job variable to the $results 
+     variable.
+
+$results = Receive-PoShJob -PoShJob $job
+
+     And, you can save the results of the job in a file by using the redirection 
+     operator (>) or the Out-File cmdlet. The following command uses the 
+     redirection operator to save the results of the job in the $job variable in 
+     the Results.txt file.
+
+
+        Receive-PoShJob -PoShJob $job > results.txt
+
+
+    
+
+ PARTIAL JOB RESULTS
+
+    Contrary to the built-in PowerShell job functions, PoShAdmin does not support
+    partial job results. If the job is complete, Receive-PoShJob gets all job
+    results. If the job is still running, Receive-PoShJob returns no results. Using
+    the "Wait" option, Receive-PoShJob will wait until the job completes before
+    it returns the results. Using the "Keep" option you can run Receive-PoShJob
+    commands again to get the results again. Without the Keep command the results
+    will be deleted.
+    
+    WARNING: if the "Keep" option is not used, the internal Powershell object will
+    be disposed. It might seem that further Receive-PoShJob commands get the result
+    again, but this is only true until the PowerShell garbage collector gets rid of
+    the internal structure. If you need to receive the results of a completed job
+    multiple times, always use the "Keep" option.
+
+    The following commands show the results of Receive-PoShJob commands run 
+    before the job is complete.
+
+
+
+    
+WAITING FOR THE RESULTS
+
+    If you run a command that takes a long time to complete, you can use 
+    the properties of the job object to determine when the job is complete. 
+    The following command uses the Get-PoShJob object to get all of the background 
+    jobs in the current session.
+
+Get-PoShJob
+
+    The results appear in a table. The status of the job appears in the State 
+    column.
+
+         State         Id Name            InstanceId
+         -----         -- ----            ----------
+     Completed          0 Job0            bbb22e14-90ce-48f2-908a-c3bf63801017
+       Running          1 Job1            f50c0b54-af81-4534-b64c-807071a0b418
+     Completed          2 Job2            4f584f94-20af-4611-afd4-44e5ff9b8a89
+
+    In this case, the State property reveals that Job 1 is still running. If 
+    you were to use the Receive-PoShJob cmdlet to get the job results now, the 
+    results would be empty.
+    
+    You can use the Wait parameter of the Receive-PoShJob cmdlet, which 
+    does not return the command prompt until the job is complete and all
+    results are available.
+
+    You can also use the Wait-PoShJob cmdlet to wait for any or all of the results 
+    of the job. Wait-PoShJob lets you wait for a particular job, for all jobs, or 
+    for any of the jobs to be completed.
+  
+    The following command uses the Wait-PoShJob cmdlet to wait for a job with 
+    ID 10.
+
+Wait-PoShJob -ID 10
+
+    As a result, the Windows PowerShell prompt is suppressed until the job 
+    is completed.
+
+    You can also wait for a predetermined period of time. This command uses 
+    the Timeout parameter to limit the wait to 120 seconds. When the time 
+    expires, the command prompt returns, but the job continues to run in the 
+    background.
+
+Wait-PoShJob -ID 10 -Timeout 120
+
+
+STOPPING A JOB
+
+    To stop a background job, use the Stop-PoShJob cmdlet. The following command 
+    starts a job to get every entry in the System event log. It saves the job
+    object in the $job variable.
+
+$job = Start-PoShJob -ScriptBlock {Get-EventLog -Log System}
+    
+    The following command stops the job. It uses a pipeline operator (|) to
+    send the job in the $job variable to Stop-PoShJob.
+
+$job | Stop-PoShJob
+
+
+DELETING A JOB
+
+    To delete a background job, use the Remove-PoShJob cmdlet. The following 
+    command deletes the job in the $job variable.
+
+Remove-PoShJob -PoShJob $job 
+
+
+INVESTIGATING A FAILED JOB
+
+    A failed job does not have any results to return. Stopped jobs change the
+    job state to failed.
+
+
+
+ 
+SEE ALSO
+   about_PoShAdmin
+   Get-PoShJob
+   Start-PoShJob
+   Stop-PoShJob
+   Receive-PoShJob
+   Remove-PoShJob

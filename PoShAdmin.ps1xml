@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!-- *******************************************************************
+Copyright (c) PoShAdmin.Net  All rights reserved.
+******************************************************************** -->
+<Configuration>
+<ViewDefinitions>
+  <View>
+    <Name>PoShJob</Name>
+    <ViewSelectedBy>
+      <TypeName>PoShAdmin.Job</TypeName>
+    </ViewSelectedBy>
+    <TableControl>
+      <TableHeaders>
+        <TableColumnHeader>
+          <Label>State</Label>
+          <Width>10</Width>
+          <Alignment>right</Alignment>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Id</Label>
+          <Width>10</Width>
+          <Alignment>Right</Alignment>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Name</Label>
+          <Width>15</Width>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>InstanceId</Label>
+        </TableColumnHeader>
+      </TableHeaders>
+      <TableRowEntries>
+        <TableRowEntry>
+          <TableColumnItems>
+            <TableColumnItem>
+              <PropertyName>State</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>Id</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>Name</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>InstanceId</PropertyName>
+            </TableColumnItem>
+          </TableColumnItems>
+        </TableRowEntry>
+      </TableRowEntries>
+    </TableControl>
+  </View>
+</ViewDefinitions>
+</Configuration>
