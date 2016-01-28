@@ -97,7 +97,7 @@ Remove-PoShJob
 param(
     [Parameter(ParameterSetName="ComputerName",Position=0,Mandatory=$true)]
         [Alias("Command")][ScriptBlock]$ScriptBlock,
-    [Parameter(ParameterSetName="LiteralFilePathComputerName",Position=1,Mandatory=$true)]
+    [Parameter(ParameterSetName="LiteralFilePathComputerName",Position=0,Mandatory=$true)]
         [Alias("PSPath")][String]$LiteralPath,
     [Parameter(ParameterSetName="FilePathComputerName",Position=0,Mandatory=$true)]
         [String]$FilePath,
@@ -125,7 +125,7 @@ begin {
         "LiteralFilePathComputerName" {
             $originalOFS=$OFS
             $OFS="`n"
-            $ScriptBlock=[ScriptBlock]::Create((Get-Content -LiteralPath $FilePath -ErrorAction Stop))
+            $ScriptBlock=[ScriptBlock]::Create((Get-Content -LiteralPath $LiteralPath -ErrorAction Stop))
             $OFS=$originalOFS
         }
     }
@@ -320,8 +320,8 @@ param(
     [Parameter(ParameterSetName="Location",Position=0,Mandatory=$true,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)]
     [Parameter(ParameterSetName="ComputerName",Position=0,Mandatory=$true,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)]
         [PoshAdmin.Job[]]$Job,
-    [Parameter(ParameterSetName="ComputerName",Position=1,Mandatory=$false,ValueFromPipelineByPropertyName=$true)]
-        [Alias('Cn')][String[]]$ComputerName,
+#    [Parameter(ParameterSetName="ComputerName",Position=1,Mandatory=$false,ValueFromPipelineByPropertyName=$true)]
+#        [Alias('Cn')][String[]]$ComputerName,
     [Parameter(ParameterSetName="InstanceIdParameterSet",Position=0,Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
         [Guid[]]$InstanceId,
     [Parameter(ParameterSetName="NameParameterSet",Position=0,Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
@@ -354,9 +354,9 @@ param(
         [Switch]$AutoRemoveJob
 )
 process{
-    if ($ComputerName) {
-        #TODO dosomethingaboutit
-    }
+#    if ($ComputerName) {
+#        #TODO dosomethingaboutit
+#    }
     switch ($PSCmdlet.ParameterSetName) {
         "Location" {if ($Job) {[PoShAdmin.Jobs]::Receive($Job,$Keep,$Wait,$AutoRemoveJob)}}
         "ComputerName" {if ($Job) {[PoShAdmin.Jobs]::Receive($Job,$Keep,$Wait,$AutoRemoveJob)}}

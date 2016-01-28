@@ -27,6 +27,10 @@ Copyright (c) PoShAdmin.Net  All rights reserved.
         </TableColumnHeader>
         <TableColumnHeader>
           <Label>InstanceId</Label>
+          <Width>36</Width>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Command</Label>
         </TableColumnHeader>
       </TableHeaders>
       <TableRowEntries>
@@ -43,6 +47,9 @@ Copyright (c) PoShAdmin.Net  All rights reserved.
             </TableColumnItem>
             <TableColumnItem>
               <PropertyName>InstanceId</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>Command</PropertyName>
             </TableColumnItem>
           </TableColumnItems>
         </TableRowEntry>
