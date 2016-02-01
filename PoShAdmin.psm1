@@ -697,3 +697,90 @@ process {
     }
 }
 }
+
+function Get-ComputerName
+{
+<#
+.SYNOPSIS
+Reads a file and creates "ComputerName" objects.
+.DESCRIPTION
+The Get-ComputerName cmdlet reads a text file line-by-line and creates objects with the "ComputerName" property from the lines.
+This makes it easier to feed a number of hostnames to Add-PQJob or Start-PoShJob.
+
+The parameters of this command are the same as the PowerShell built-in cmdlet "Get-Content" parameters.
+Type Get-Help Get-Content to learn about all the input parameters.
+.LINK
+Get-Content
+Add-PQJob
+Start-PoShJob
+#>
+[Alias("gcn")][CmdletBinding(DefaultParameterSetName="Path")]
+param(
+        [Parameter(ParameterSetName = "Path", Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+            [System.Management.Automation.PSCredential]$Credential,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false)]
+            [Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]$Encoding,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false)]
+            [string[]]$Exclude,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false)]
+            [string]$Filter,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false)]
+            [Switch]$Force,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false)]
+            [string[]]$Include,
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+            [Alias("PSPath")][string[]]$LiteralPath,
+        [Parameter(ParameterSetName = "Path", Mandatory = $true, Position = 1, ValueFromPipelineByPropertyName = $true)]
+            [string[]]$Path,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+            [Int64]$ReadCount,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+            [Alias("First","Head")][Int64]$TotalCount,
+        [Parameter(ParameterSetName = "Path", Mandatory = $false)]
+        [Parameter(ParameterSetName = "LiteralPath", Mandatory = $false)]
+            [Switch]$UseTransaction
+)
+DynamicParam {
+    if ($PSVersionTable.PSVersion.Major -ge 3) {
+        $attributes0=New-Object System.Management.Automation.ParameterAttribute -Property @{"ParameterSetName"="Path"}
+        $attributes1=New-Object System.Management.Automation.ParameterAttribute -Property @{"ParameterSetName"="LiteralPath"}
+        $attributeCollection = new-object System.Collections.ObjectModel.Collection[System.Attribute]
+        $attributeCollection.Add($attributes0)
+        $attributeCollection.Add($attributes1)
+        $paramDictionary=New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+        if ($PSVersionTable.PSVersion.Major -ge 5) {
+            $delimParam=New-Object System.Management.Automation.RuntimeDefinedParameter('Delimiter', [string], $attributeCollection)
+            $rawParam=New-Object System.Management.Automation.RuntimeDefinedParameter('Raw', [switch], $attributeCollection)
+            $streamParam=New-Object System.Management.Automation.RuntimeDefinedParameter('Stream', [string], $attributeCollection)
+            $paramDictionary.Add('Delimiter',$delimParam)
+            $paramDictionary.Add('Raw',$rawParam)
+            $paramDictionary.Add('Stream',$streamParam)
+        }
+        $attributeCollection = new-object System.Collections.ObjectModel.Collection[System.Attribute]
+        $attributeCollection.Add($attributes0)
+        $attributeCollection.Add($attributes1)
+        $attributes2=New-Object System.Management.Automation.AliasAttribute -ArgumentList "Last"
+        $attributeCollection.Add($attributes2)
+        $tailParam=New-Object System.Management.Automation.RuntimeDefinedParameter('Tail', [Int32], $attributeCollection)
+        $paramDictionary.Add('Tail',$tailParam)
+        return $paramDictionary
+    }
+}
+Begin {
+    Get-Content @PSBoundParameters @Args | foreach {
+        New-Object PSObject -Property @{
+            "ComputerName" = $_
+        }
+    }
+}
+}
+
