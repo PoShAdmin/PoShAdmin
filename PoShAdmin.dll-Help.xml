@@ -1,0 +1,1598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <!-- Cmdlet: Add-PQJob -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Add-PQJob</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>PQJob</command:noun>
+      <maml:description>
+        <maml:para>Creates a PoShAdmin PQJob background job and adds it to the execution queue.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Add-PQJob cmdlet starts a PoShAdmin "Parallel Queue" (PQ) background job on the local computer.</maml:para>
+      <maml:para>A PoShAdmin PQJob background job is added to the PoShAdmin "Parallel Queue". A PQJob object is returned immediately, even if the job takes an extended time to complete. You can continue to work in the session without interruption while the job runs.</maml:para>
+      <maml:para>The PQJob object contains useful information about the job, including the job results. For more information including PoShAdmin PQJobs, see about_PQJobs</maml:para>
+      <maml:para>To run a background job on a remote computer, use the the ComputerName parameter.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: ScriptBlock -->
+      <command:syntaxItem>
+        <maml:name>Add-PQJob</maml:name>
+        <!-- Parameter: ScriptBlock -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0">
+          <maml:name>ScriptBlock</maml:name>
+          <maml:description>
+            <maml:para>Specifies the commands to run in the background job. Enclose the commands in braces ( { } ) to create a script block. This parameter is required.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ScriptBlock[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.ScriptBlock[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ArgumentList -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+          <maml:name>ArgumentList</maml:name>
+          <maml:description>
+            <maml:para>Specifies the arguments (parameter values) for the script that is specified by the FilePath or ScriptBlock parameter.</maml:para>
+            <maml:para>Because all of the values that follow the ArgumentList parameter name are interpreted as being values of ArgumentList, the ArgumentList parameter should be the last parameter in the command.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">object[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Object[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: NamedParameters -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="2">
+          <maml:name>NamedParameters</maml:name>
+          <maml:description>
+            <maml:para>Specifies the named parameter values for the script that is specified by the FilePath parameter.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: InputObject -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+          <maml:name>InputObject</maml:name>
+          <maml:description>
+            <maml:para>Specifies input to the command. Enter a variable that contains the objects, or type a command or expression that generates the objects.</maml:para>
+            <maml:para>In the value of the ScriptBlock parameter, use the $input automatic variable to represent the input objects.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PSDataCollection`1</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.PSDataCollection`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Tag -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>Tag</maml:name>
+          <maml:description>
+            <maml:para>Specifies a friendly name for the new job. You can use the name to identify the job.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ComputerName -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specify a computer name where the job will run. (Remote execution.)</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Credential -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has permission to perform this action. The default is the current user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Authentication -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Authentication</maml:name>
+          <maml:description>
+            <maml:para>Specifies the mechanism that is used to authenticate the user's credentials. Valid values are Default, Basic, Credssp, Digest, Kerberos, Negotiate, and NegotiateWithImplicitCredential. The default value is Default.</maml:para>
+            <maml:para>Possible values: Default, Basic, Negotiate, NegotiateWithImplicitCredential, Credssp, Digest, Kerberos</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">AuthenticationMechanism</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.Runspaces.AuthenticationMechanism</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Default</dev:defaultValue>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">Default</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Basic</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Negotiate</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">NegotiateWithImplicitCredential</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Credssp</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Digest</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Kerberos</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <!-- Parameter: Http -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Http</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the remote WinRM connection should use the unsecure HTTP protocol instead of the secure HTTPS protocol.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <!-- Parameter set: Path -->
+      <command:syntaxItem>
+        <maml:name>Add-PQJob</maml:name>
+        <!-- Parameter: ArgumentList -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+          <maml:name>ArgumentList</maml:name>
+          <maml:description>
+            <maml:para>Specifies the arguments (parameter values) for the script that is specified by the FilePath or ScriptBlock parameter.</maml:para>
+            <maml:para>Because all of the values that follow the ArgumentList parameter name are interpreted as being values of ArgumentList, the ArgumentList parameter should be the last parameter in the command.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">object[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Object[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: NamedParameters -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="2">
+          <maml:name>NamedParameters</maml:name>
+          <maml:description>
+            <maml:para>Specifies the named parameter values for the script that is specified by the FilePath parameter.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: InputObject -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+          <maml:name>InputObject</maml:name>
+          <maml:description>
+            <maml:para>Specifies input to the command. Enter a variable that contains the objects, or type a command or expression that generates the objects.</maml:para>
+            <maml:para>In the value of the ScriptBlock parameter, use the $input automatic variable to represent the input objects.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PSDataCollection`1</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.PSDataCollection`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Tag -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>Tag</maml:name>
+          <maml:description>
+            <maml:para>Specifies a friendly name for the new job. You can use the name to identify the job.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ComputerName -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specify a computer name where the job will run. (Remote execution.)</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Credential -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has permission to perform this action. The default is the current user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Authentication -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Authentication</maml:name>
+          <maml:description>
+            <maml:para>Specifies the mechanism that is used to authenticate the user's credentials. Valid values are Default, Basic, Credssp, Digest, Kerberos, Negotiate, and NegotiateWithImplicitCredential. The default value is Default.</maml:para>
+            <maml:para>Possible values: Default, Basic, Negotiate, NegotiateWithImplicitCredential, Credssp, Digest, Kerberos</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">AuthenticationMechanism</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.Runspaces.AuthenticationMechanism</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Default</dev:defaultValue>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">Default</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Basic</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Negotiate</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">NegotiateWithImplicitCredential</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Credssp</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Digest</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Kerberos</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <!-- Parameter: Http -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Http</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the remote WinRM connection should use the unsecure HTTP protocol instead of the secure HTTPS protocol.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: Path -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Runs the specified local script(s) as a background job. Enter the path and file name of the script(s) or pipe script path(s) to Add-PQJob. The script(s) must reside on the local computer or in a directory that the local computer can access. Supports wildcards.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Encoding -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Encoding</maml:name>
+          <maml:description>
+            <maml:para>Specify the file encoding when using the Path or LiteralPath parameters.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Encoding</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Text.Encoding</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>System.Text.UTF8Encoding</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <!-- Parameter set: LiteralPath -->
+      <command:syntaxItem>
+        <maml:name>Add-PQJob</maml:name>
+        <!-- Parameter: ArgumentList -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+          <maml:name>ArgumentList</maml:name>
+          <maml:description>
+            <maml:para>Specifies the arguments (parameter values) for the script that is specified by the FilePath or ScriptBlock parameter.</maml:para>
+            <maml:para>Because all of the values that follow the ArgumentList parameter name are interpreted as being values of ArgumentList, the ArgumentList parameter should be the last parameter in the command.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">object[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Object[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: NamedParameters -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="2">
+          <maml:name>NamedParameters</maml:name>
+          <maml:description>
+            <maml:para>Specifies the named parameter values for the script that is specified by the FilePath parameter.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: InputObject -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+          <maml:name>InputObject</maml:name>
+          <maml:description>
+            <maml:para>Specifies input to the command. Enter a variable that contains the objects, or type a command or expression that generates the objects.</maml:para>
+            <maml:para>In the value of the ScriptBlock parameter, use the $input automatic variable to represent the input objects.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PSDataCollection`1</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.PSDataCollection`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Tag -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>Tag</maml:name>
+          <maml:description>
+            <maml:para>Specifies a friendly name for the new job. You can use the name to identify the job.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ComputerName -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specify a computer name where the job will run. (Remote execution.)</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Credential -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has permission to perform this action. The default is the current user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Authentication -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Authentication</maml:name>
+          <maml:description>
+            <maml:para>Specifies the mechanism that is used to authenticate the user's credentials. Valid values are Default, Basic, Credssp, Digest, Kerberos, Negotiate, and NegotiateWithImplicitCredential. The default value is Default.</maml:para>
+            <maml:para>Possible values: Default, Basic, Negotiate, NegotiateWithImplicitCredential, Credssp, Digest, Kerberos</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">AuthenticationMechanism</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.Runspaces.AuthenticationMechanism</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Default</dev:defaultValue>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">Default</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Basic</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Negotiate</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">NegotiateWithImplicitCredential</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Credssp</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Digest</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Kerberos</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <!-- Parameter: Http -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Http</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the remote WinRM connection should use the unsecure HTTP protocol instead of the secure HTTPS protocol.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: LiteralPath -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0">
+          <maml:name>LiteralPath</maml:name>
+          <maml:description>
+            <maml:para>Runs the specified local script(s) as a background job. Enter the path and file name of the script(s) or pipe script path(s) to Add-PQJob. The script(s) must reside on the local computer or in a directory that the local computer can access.</maml:para>
+            <maml:para>Unlike the FilePath parameter, the value of LiteralPath is used exactly as it is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any characters as escape sequences.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Encoding -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Encoding</maml:name>
+          <maml:description>
+            <maml:para>Specify the file encoding when using the Path or LiteralPath parameters.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Encoding</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Text.Encoding</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>System.Text.UTF8Encoding</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <!-- Parameter set: Job -->
+      <command:syntaxItem>
+        <maml:name>Add-PQJob</maml:name>
+        <!-- Parameter: Job -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="0">
+          <maml:name>Job</maml:name>
+          <maml:description>
+            <maml:para>Specify the PQJob object to add the the Parallel Queue (PQ).</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PQJob[]</command:parameterValue>
+          <dev:type>
+            <maml:name>PoShAdmin.PQJob[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: ScriptBlock -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0">
+        <maml:name>ScriptBlock</maml:name>
+        <maml:description>
+          <maml:para>Specifies the commands to run in the background job. Enclose the commands in braces ( { } ) to create a script block. This parameter is required.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ScriptBlock[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.ScriptBlock[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ArgumentList -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+        <maml:name>ArgumentList</maml:name>
+        <maml:description>
+          <maml:para>Specifies the arguments (parameter values) for the script that is specified by the FilePath or ScriptBlock parameter.</maml:para>
+          <maml:para>Because all of the values that follow the ArgumentList parameter name are interpreted as being values of ArgumentList, the ArgumentList parameter should be the last parameter in the command.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">object[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: NamedParameters -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="2">
+        <maml:name>NamedParameters</maml:name>
+        <maml:description>
+          <maml:para>Specifies the named parameter values for the script that is specified by the FilePath parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: InputObject -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>Specifies input to the command. Enter a variable that contains the objects, or type a command or expression that generates the objects.</maml:para>
+          <maml:para>In the value of the ScriptBlock parameter, use the $input automatic variable to represent the input objects.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">PSDataCollection`1</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSDataCollection`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Tag -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+        <maml:name>Tag</maml:name>
+        <maml:description>
+          <maml:para>Specifies a friendly name for the new job. You can use the name to identify the job.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ComputerName -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+        <maml:name>ComputerName</maml:name>
+        <maml:description>
+          <maml:para>Specify a computer name where the job will run. (Remote execution.)</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Credential -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>Specifies a user account that has permission to perform this action. The default is the current user.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Authentication -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Authentication</maml:name>
+        <maml:description>
+          <maml:para>Specifies the mechanism that is used to authenticate the user's credentials. Valid values are Default, Basic, Credssp, Digest, Kerberos, Negotiate, and NegotiateWithImplicitCredential. The default value is Default.</maml:para>
+          <maml:para>Possible values: Default, Basic, Negotiate, NegotiateWithImplicitCredential, Credssp, Digest, Kerberos</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">AuthenticationMechanism</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.Runspaces.AuthenticationMechanism</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Default</dev:defaultValue>
+        <command:parameterValueGroup>
+          <command:parameterValue required="false" variableLength="false">Default</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Basic</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Negotiate</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">NegotiateWithImplicitCredential</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Credssp</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Digest</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Kerberos</command:parameterValue>
+        </command:parameterValueGroup>
+      </command:parameter>
+      <!-- Parameter: Http -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Http</maml:name>
+        <maml:description>
+          <maml:para>Specifies that the remote WinRM connection should use the unsecure HTTP protocol instead of the secure HTTPS protocol.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: Job -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="0">
+        <maml:name>Job</maml:name>
+        <maml:description>
+          <maml:para>Specify the PQJob object to add the the Parallel Queue (PQ).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">PQJob[]</command:parameterValue>
+        <dev:type>
+          <maml:name>PoShAdmin.PQJob[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Path -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Runs the specified local script(s) as a background job. Enter the path and file name of the script(s) or pipe script path(s) to Add-PQJob. The script(s) must reside on the local computer or in a directory that the local computer can access. Supports wildcards.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: LiteralPath -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0">
+        <maml:name>LiteralPath</maml:name>
+        <maml:description>
+          <maml:para>Runs the specified local script(s) as a background job. Enter the path and file name of the script(s) or pipe script path(s) to Add-PQJob. The script(s) must reside on the local computer or in a directory that the local computer can access.</maml:para>
+          <maml:para>Unlike the FilePath parameter, the value of LiteralPath is used exactly as it is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any characters as escape sequences.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Encoding -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Encoding</maml:name>
+        <maml:description>
+          <maml:para>Specify the file encoding when using the Path or LiteralPath parameters.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Encoding</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Text.Encoding</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>System.Text.UTF8Encoding</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.ScriptBlock[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specifies the commands to run in the background job. Enclose the commands in braces ( { } ) to create a script block. This parameter is required.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specifies the arguments (parameter values) for the script that is specified by the FilePath or ScriptBlock parameter.</maml:para>
+          <maml:para>Because all of the values that follow the ArgumentList parameter name are interpreted as being values of ArgumentList, the ArgumentList parameter should be the last parameter in the command.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specifies the named parameter values for the script that is specified by the FilePath parameter.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSDataCollection`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specifies input to the command. Enter a variable that contains the objects, or type a command or expression that generates the objects.</maml:para>
+          <maml:para>In the value of the ScriptBlock parameter, use the $input automatic variable to represent the input objects.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specifies a friendly name for the new job. You can use the name to identify the job.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specify a computer name where the job will run. (Remote execution.)</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>PoShAdmin.PQJob[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Specify the PQJob object to add the the Parallel Queue (PQ).</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Runs the specified local script(s) as a background job. Enter the path and file name of the script(s) or pipe script path(s) to Add-PQJob. The script(s) must reside on the local computer or in a directory that the local computer can access. Supports wildcards.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Runs the specified local script(s) as a background job. Enter the path and file name of the script(s) or pipe script path(s) to Add-PQJob. The script(s) must reside on the local computer or in a directory that the local computer can access.</maml:para>
+          <maml:para>Unlike the FilePath parameter, the value of LiteralPath is used exactly as it is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any characters as escape sequences.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command adds a PQ background job to the Parallel Queue that runs a Get-Process command. The command returns a PQJob object with information about the job. The command prompt returns immediately so that you can work in the session while the job runs in the background.</maml:para>
+        </maml:introduction>
+        <dev:code>Add-PQJob -ScriptBlock {Get-Process}</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command adds three PQ background jobs to the Parallel Queue: one with a scriptblock to get the outlook.exe process, one for explorer.exe and one that returns the onedrive process.</maml:para>
+        </maml:introduction>
+        <dev:code>"outlook","explorer","onedrive" | Add-PQJob -ScriptBlock {Get-Process $input} </dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 3  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command schedules the Sample.ps1 script as a background job.</maml:para>
+        </maml:introduction>
+        <dev:code>Add-PQJob -Path C:\Scripts\Sample.ps1</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 4  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command schedules a command to run remotely on two different computers. It gets the winrm service from both the computers. Use Get-PQResult to poll for the results.</maml:para>
+        </maml:introduction>
+        <dev:code>Add-PQJob -ComputerName computer1,computer2 -ScriptBlock {Get-Service winrm}</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 5  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command schedules a scriptblock to run remotely on a list of different computers. The computer names are stored in a file called machines.txt as a plain-text file, one computername in each line. Note that the gcn alias stands for Get-ComputerName. It works similarly to Get-Content but it turns the file of hostnames into input for Add-PQJob.</maml:para>
+        </maml:introduction>
+        <dev:code>gcn .\machines.txt | Add-PQJob -ScriptBlock {Get-Process explorer}</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 6  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command schedules a scriptblock to run remotely on a list of different computers. The computer names are stored in a file called machines.csv in the following format: The first line of the file says "ComputerName" the second and additional lines contain one hostname per line.</maml:para>
+        </maml:introduction>
+        <dev:code>Import-CSV .\machines.csv | Add-PQJob -ScriptBlock {Get-Process explorer}</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 7  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command schedules different scriptblocks to run remotely on a list of different computers. The file gathering.csv is a comma-separated values file with two columns: ComputerName and ScriptBlock. Each computer will execute the scriptblock defined in the same row after added to Add-PQJob. Optionally input parameters can be also added in the CSV file with the column names ArgumentList and NamedParameters.</maml:para>
+        </maml:introduction>
+        <dev:code>Import-CSV gathering.csv | Add-PQJob</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 8  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command tags a string to the PQJob object so it can be identified by it. Perfect for adding computernames in cases where the job itself runs locally but uses other methods than winrm to reach out to remote computers. (For example RPC or remote registry.)</maml:para>
+        </maml:introduction>
+        <dev:code>Add-PQJob -ScriptBlock {gwmi Win32_operatingsystem -ComputerName computer1} -Tag computer1</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 9  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command uses HTTP instead of the default HTTPS to connect to a remote machine using WinRM.</maml:para>
+        </maml:introduction>
+        <dev:code>Add-PQJob -ScriptBlock {$env:Computername} -HTTP</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-ComputerName</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQResult</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Remove-PQJob -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Remove-PQJob</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>PQJob</command:noun>
+      <maml:description>
+        <maml:para>Fail a PQ job in the system.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>WARNING: This command is for debugging purposes only.</maml:para>
+      <maml:para>Kills (stops) a running job and places it in the result queue so it can be viewed and removed by Get-PQResult.</maml:para>
+      <maml:para>Contrary to its naming, Remove-PQJob does not remove a PQ job from the system. It only removes it from the running queue.</maml:para>
+      <maml:para>This has no effect on already finished jobs.</maml:para>
+      <maml:para>To remove a PQ job from the system after it finished, use Get-PQResult.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Remove-PQJob</maml:name>
+        <!-- Parameter: Job -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="0">
+          <maml:name>Job</maml:name>
+          <maml:description>
+            <maml:para>List of PQJobs to stop</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">PQJob[]</command:parameterValue>
+          <dev:type>
+            <maml:name>PoShAdmin.PQJob[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: Job -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="0">
+        <maml:name>Job</maml:name>
+        <maml:description>
+          <maml:para>List of PQJobs to stop</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">PQJob[]</command:parameterValue>
+        <dev:type>
+          <maml:name>PoShAdmin.PQJob[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>PoShAdmin.PQJob[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>List of PQJobs to stop</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>These commands create a new job, then kill them during their run, then remove the results.</maml:para>
+        </maml:introduction>
+        <dev:code>$job=Add-PQJob {"Hello";Start-Sleep 60;"Good bye"}</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQStatus</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-PQueue</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQueue</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Get-PQResult -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PQResult</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PQResult</command:noun>
+      <maml:description>
+        <maml:para>Gets the results of a PoShAdmin PQJob background job in the current session.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-PQResult cmdlet gets the results of finished PoShAdmin PQJob background started by the "Parallel Queue" after they were addded using the Add-PQJob cmdlet. You can get the results of all finished jobs or identify jobs by their ID, Tag, instance ID, computer name or by submitting a job object.</maml:para>
+      <maml:para>When you add a PQJob using Add-PQJob, the job is added to the queue but the results do not appear immediately. Instead, the command returns an object that represents the background job. The PQJob object contains useful information about the PQJob, including the results if they are available already. This method allows you to continue working in the session while the job runs. For more information about "Parallel Queue" and PQJob, see about_PQJobs.</maml:para>
+      <maml:para>The Get-PQResult cmdlet gets the results of finished jobs that have been generated by the time that the Get-PQResult command is submitted. If the results are not yet complete, the job is not returned. Only finished jobs are returned by Get-PQResult.</maml:para>
+      <maml:para>The returned objects have an Output property which contains the result of the job.</maml:para>
+      <maml:para>Job results are deleted from the "Parallel Queue" when returned by Get-PQResult.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Get-PQResult</maml:name>
+        <!-- Parameter: ComputerName -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Get the results of jobs that were run on the specified computers and they finished. Enter the computer names. Wildcards are supported. The default is all jobs in the current session that have finished.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: State -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>State</maml:name>
+          <maml:description>
+            <maml:para>Get the results of jobs that are in a specific finished state. Available values are Compiled, Failed, TimedOut.</maml:para>
+            <maml:para>Possible values: NotStarted, Running, Failed, Completed, TimedOut</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">JobState</command:parameterValue>
+          <dev:type>
+            <maml:name>PoShAdmin.JobState</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para>PoShJob and PQJob JobStates</maml:para>
+            </maml:description>
+          </dev:type>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">NotStarted</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Running</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Failed</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Completed</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">TimedOut</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <!-- Parameter: Tag -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+          <maml:name>Tag</maml:name>
+          <maml:description>
+            <maml:para>Get the results of jobs that have a specific Tag. Wildcards are supported.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: ComputerName -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+        <maml:name>ComputerName</maml:name>
+        <maml:description>
+          <maml:para>Get the results of jobs that were run on the specified computers and they finished. Enter the computer names. Wildcards are supported. The default is all jobs in the current session that have finished.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: State -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+        <maml:name>State</maml:name>
+        <maml:description>
+          <maml:para>Get the results of jobs that are in a specific finished state. Available values are Compiled, Failed, TimedOut.</maml:para>
+          <maml:para>Possible values: NotStarted, Running, Failed, Completed, TimedOut</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">JobState</command:parameterValue>
+        <dev:type>
+          <maml:name>PoShAdmin.JobState</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para>PoShJob and PQJob JobStates</maml:para>
+          </maml:description>
+        </dev:type>
+        <command:parameterValueGroup>
+          <command:parameterValue required="false" variableLength="false">NotStarted</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Running</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Failed</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Completed</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">TimedOut</command:parameterValue>
+        </command:parameterValueGroup>
+      </command:parameter>
+      <!-- Parameter: Tag -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByPropertyName)" position="named">
+        <maml:name>Tag</maml:name>
+        <maml:description>
+          <maml:para>Get the results of jobs that have a specific Tag. Wildcards are supported.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Get the results of jobs that were run on the specified computers and they finished. Enter the computer names. Wildcards are supported. The default is all jobs in the current session that have finished.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>PoShAdmin.JobState</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Get the results of jobs that are in a specific finished state. Available values are Compiled, Failed, TimedOut.</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <maml:description>
+          <maml:para>Get the results of jobs that have a specific Tag. Wildcards are supported.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command receives the output of all jobs that are finished in the result queue.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQResult</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command receives the output of jobs that are finished and that were run on a specific computer.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQResult -ComputerName computer1</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 3  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command receives the output of jobs that are finished and that are in a specific state.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQResult -State Failed</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 4  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command receives the output of jobs that are finished and that are tagged by a specific string.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQResult -Tag computer3</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-PQJob</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Get-PQSettings -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PQSettings</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PQSettings</command:noun>
+      <maml:description>
+        <maml:para>Gets the session settings for the "Parallel Queue".</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Gets the settings of the "Parallel Queue". Currently two settings are returned.</maml:para>
+      <maml:para>MaxThreads: the number of threads that are allowed to run in parallel at the ssame time. If the "Parallel Queue" has more jobs to run, the rest of the jobs are kept waiting until one of the threads are finished. Default is 50 threads.</maml:para>
+      <maml:para>Timeout: if a thread overruns this many seconds, it is automatically killed by the "Parallel Queue" scheduling engine. Default is 120 seconds.</maml:para>
+    </maml:description>
+    <command:syntax />
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command will get the global settings for the Parallel Queue.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQSettings</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-PQSettings</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Set-PQSettings -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Set-PQSettings</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>PQSettings</command:noun>
+      <maml:description>
+        <maml:para>Sets session settings for the "Parallel Queue".</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-PQSettings cmdlet controls the session-wide settings for parallel queue.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Set-PQSettings</maml:name>
+        <!-- Parameter: MaxThreads -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MaxThreads</maml:name>
+          <maml:description>
+            <maml:para>The number of maximum threads that are allowed to run in parallel at the ssame time. If the "Parallel Queue" has more jobs to run, the rest of the jobs are kept waiting until one of the threads are finished. Default is 50 threads.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: Timeout -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>If a thread overruns this many seconds, it is automatically killed by the "Parallel Queue" scheduling engine. Default is 120 seconds.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: MaxThreads -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>MaxThreads</maml:name>
+        <maml:description>
+          <maml:para>The number of maximum threads that are allowed to run in parallel at the ssame time. If the "Parallel Queue" has more jobs to run, the rest of the jobs are kept waiting until one of the threads are finished. Default is 50 threads.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: Timeout -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>If a thread overruns this many seconds, it is automatically killed by the "Parallel Queue" scheduling engine. Default is 120 seconds.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command will set the global Timeout setting for the Parallel Queue.</maml:para>
+        </maml:introduction>
+        <dev:code>Set-PQSettings -Timeout 60</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQSettings</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Get-PQStatus -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PQStatus</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PQStatus</command:noun>
+      <maml:description>
+        <maml:para>Gets the status of the PoShAdmin PQ Engine.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Gets details of the PoShAdmin PQ Engine's state together with the number of jobs in different states.</maml:para>
+      <maml:para>The returned object's properties contain two sets of data. The errors reported by the PQ Engine are stored in the EngineErrors property.</maml:para>
+      <maml:para>The number of jobs in different states are reported in the ActiveSize, QueueSize, ResultSize, ResultFailed, ResultCompleted and ResultTimedout properties.</maml:para>
+      <maml:para>Note that the PQ Engine runs parallel to the current session. This means that requesting the number of jobs in different states requires the Engine to stop processing them for a short moment.</maml:para>
+      <maml:para>When Get-PQStatus is run, be default it will only return the numbers for ActiveSize, QueueSize and ResultSize. The rest of the states will report -1.</maml:para>
+      <maml:para>This will ensure that the PQ Engine is only paused for the shortest amount of time possible.</maml:para>
+      <maml:para>To get all properties, use the -All switch. To get only a specific queue size, use the respective switches (-Active, -Queue, -Result, -ResultCompleted, -ResultFailed and - ResultTimedout). The switches can be compiled to get a set of results.</maml:para>
+      <maml:para>Use the -Timelimit switch on long running queues to try to get the results for up to 100ms before giving up. Without the switch the cmdlet will wait until all information is gathered. Using the switch ensures that the cmdlet is not running too long.</maml:para>
+      <maml:para>WARNING: The -Timelimit switch cannot guarantee to gather all results. In long running queues when gathering the result would require more than 100ms, some of the results might return -1 if they were not gathered within the allotted time.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Get-PQStatus</maml:name>
+        <!-- Parameter: Active -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Active</maml:name>
+          <maml:description>
+            <maml:para>Return the number of currently running PQ jobs in the ActiveSize property.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: Queue -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Queue</maml:name>
+          <maml:description>
+            <maml:para>Return the number of jobs currently in the main queue. The main queue contains the jobs that are scheduled to run, the currently running jobs and jobs that have just finished but they were not moved over to the result queue yet. These finished jobs don't show up in the result queue or the ResultSize property yet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: Result -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Result</maml:name>
+          <maml:description>
+            <maml:para>Return the number of finished jobs in the result queue. This queue can be polled by the Get-PQResult cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ResultCompleted -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ResultCompleted</maml:name>
+          <maml:description>
+            <maml:para>Return the number of successfully completed jobs in the result queue. These jobs have a JobState of Completed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ResultFailed -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ResultFailed</maml:name>
+          <maml:description>
+            <maml:para>Return the number of failed jobs in the result queue. These jobs have a JobState of Failed. Killed jobs are also considered failed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ResultTimedOut -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ResultTimedOut</maml:name>
+          <maml:description>
+            <maml:para>Return the number of jobs in the result queue that timed out during execution. These jobs have a JobState of Timedout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ResultAll -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ResultAll</maml:name>
+          <maml:description>
+            <maml:para>Return the ResultSize, ResultFailed, ResultCompleted and ResultTimedout properties. The same can be achieved by using the -Result -ResultSize -ResultFailed -ResultCompleted -ResultTimedout switches together.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: All -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>All</maml:name>
+          <maml:description>
+            <maml:para>Return all queue sizes and details. The same can be acheived by using the -Active -Queue -Result -ResultSize -ResultFailed -ResultCompleted -ResultTimedout switches together.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: Timelimit -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Timelimit</maml:name>
+          <maml:description>
+            <maml:para>Limit the execution of the cmdlet to 100ms. If some of the results were not gathered by that time, the property will return -1.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: Active -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Active</maml:name>
+        <maml:description>
+          <maml:para>Return the number of currently running PQ jobs in the ActiveSize property.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: Queue -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Queue</maml:name>
+        <maml:description>
+          <maml:para>Return the number of jobs currently in the main queue. The main queue contains the jobs that are scheduled to run, the currently running jobs and jobs that have just finished but they were not moved over to the result queue yet. These finished jobs don't show up in the result queue or the ResultSize property yet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: Result -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Result</maml:name>
+        <maml:description>
+          <maml:para>Return the number of finished jobs in the result queue. This queue can be polled by the Get-PQResult cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ResultCompleted -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ResultCompleted</maml:name>
+        <maml:description>
+          <maml:para>Return the number of successfully completed jobs in the result queue. These jobs have a JobState of Completed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ResultFailed -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ResultFailed</maml:name>
+        <maml:description>
+          <maml:para>Return the number of failed jobs in the result queue. These jobs have a JobState of Failed. Killed jobs are also considered failed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ResultTimedOut -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ResultTimedOut</maml:name>
+        <maml:description>
+          <maml:para>Return the number of jobs in the result queue that timed out during execution. These jobs have a JobState of Timedout.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ResultAll -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ResultAll</maml:name>
+        <maml:description>
+          <maml:para>Return the ResultSize, ResultFailed, ResultCompleted and ResultTimedout properties. The same can be achieved by using the -Result -ResultSize -ResultFailed -ResultCompleted -ResultTimedout switches together.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: All -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Return all queue sizes and details. The same can be acheived by using the -Active -Queue -Result -ResultSize -ResultFailed -ResultCompleted -ResultTimedout switches together.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: Timelimit -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Timelimit</maml:name>
+        <maml:description>
+          <maml:para>Limit the execution of the cmdlet to 100ms. If some of the results were not gathered by that time, the property will return -1.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command will get the number of currently running jobs. Note that all other properties are set to -1.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQStatus -Active</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command will get all details about the PQ Engine's state.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQStatus -All</dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 3  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command will get only the Results queue size and the number of finished jobs that completed without errors.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQStatus -Result -ResultCompleted</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-PQueue</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQueue</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-PQJob</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Clear-PQueue -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Clear-PQueue</command:name>
+      <command:verb>Clear</command:verb>
+      <command:noun>PQueue</command:noun>
+      <maml:description>
+        <maml:para>Clear the PoShAdmin Parallel Queue and cancel (kill) all queued and running PQ jobs.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>WARNING: This command is for debugging purposes only.</maml:para>
+      <maml:para>Clears the PQ "Parallel Queue" queued and running jobs from the system. PQJobs that were not started are deleted, running PQ jobs are cancelled then deleted.</maml:para>
+      <maml:para>Finished jobs in the result queue are not deleted and they are still available with Get-PQResult.</maml:para>
+      <maml:para>WARNING: Jobs that are finished but have not been moved to the finished queue are deleted as well.</maml:para>
+    </maml:description>
+    <command:syntax />
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command clears the main queue.</maml:para>
+        </maml:introduction>
+        <dev:code>Clear-PQueue</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQStatus</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQueue</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-PQJob</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <!-- Cmdlet: Get-PQueue -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PQueue</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PQueue</command:noun>
+      <maml:description>
+        <maml:para>Get the current PQ "Parallel Queue" queued and running objects.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>WARNING: This command is for debugging purposes only.</maml:para>
+      <maml:para>Returns a list of all PQJob objects that are currently queued to run (state: NotStarted) or currently running (state: Running).</maml:para>
+      <maml:para>WARNING: This command may temporarily include PQJobs that have just finished running (state: Completed, TimedOut or Failed) but they are yet to be moved to the results queue.</maml:para>
+      <maml:para>This is a transient state and after the next run of the Parallel Queue engine they will be moved over to the result queue and they will be available using the Get-PQResult command.</maml:para>
+    </maml:description>
+    <command:syntax />
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>This command gets all jobs currently in the main queue.</maml:para>
+        </maml:introduction>
+        <dev:code>Get-PQueue</dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_PoShAdmin</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>about_PQJobs</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-PQStatus</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-PQueue</maml:linkText>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-PQJob</maml:linkText>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>
