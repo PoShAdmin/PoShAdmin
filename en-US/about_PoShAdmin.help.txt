@@ -5,7 +5,11 @@ SHORT DESCRIPTION
     PoShAdmin is a versatile and fast SysAdmin toolset for mass management of Windows machines.
 
 LONG DESCRIPTION
-    PoShAdmin helps System Administrators' life easier by running PowerShell scripts and commands in parallel, on multiple machines, with an easier syntax for commands and with an easy-to-use graphical interface. Combined with the remote functionality of PowerShell this makes daily tasks a breeze. Changing registry keys or services on multiple machines becomes a few clicks.
+    PoShAdmin helps System Administrators' life by running PowerShell scripts and
+    commands in parallel, on multiple machines, with an easier syntax for commands and with an
+    easy-to-use graphical interface. Combined with the remote functionality of PowerShell this
+    makes daily tasks a breeze. Changing registry keys or services on multiple machines become
+    a few clicks.
 
 EXAMPLES
     Use "Import-Module PoShAdmin" to import all functionality.
@@ -22,7 +26,7 @@ KEYWORDS
 
 SEE ALSO
     about_PoShJobs
-    about_PoShPQ
+    about_PQJobs
     about_PoShPixies
     about_PoShGUI
     about_PoShRemoteRegistry

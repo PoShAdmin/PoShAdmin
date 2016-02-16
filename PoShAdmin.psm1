@@ -33,8 +33,6 @@ When you use this parameter, PoShAdmin converts the contents of the specified sc
 
 .PARAMETER InputObject
 
-WARNING! Not supported yet.
-
 Specifies input to the command. Enter a variable that contains the objects, or type a command or expression that generates the objects.
 
 In the value of the ScriptBlock parameter, use the $input automatic variable to represent the input objects.
@@ -105,10 +103,10 @@ param(
     [Parameter(ParameterSetName="FilePathComputerName",Mandatory=$false,ValueFromPipelineByPropertyName=$true)]
     [Parameter(ParameterSetName="LiteralFilePathComputerName",Mandatory=$false,ValueFromPipelineByPropertyName=$true)]
         [String]$Name,
-#    [Parameter(ParameterSetName="ComputerName",Mandatory=$false,ValueFromPipeline=$true)]
-#    [Parameter(ParameterSetName="FilePathComputerName",Mandatory=$false,ValueFromPipeline=$true)]
-#    [Parameter(ParameterSetName="LiteralFilePathComputerName",Mandatory=$false,ValueFromPipeline=$true)]
-#        [PSObject]$InputObject,
+    [Parameter(ParameterSetName="ComputerName",Mandatory=$false,ValueFromPipeline=$true)]
+    [Parameter(ParameterSetName="FilePathComputerName",Mandatory=$false,ValueFromPipeline=$true)]
+    [Parameter(ParameterSetName="LiteralFilePathComputerName",Mandatory=$false,ValueFromPipeline=$true)]
+        [PSObject]$InputObject,
     [Parameter(ParameterSetName="ComputerName",Mandatory=$false,ValueFromRemainingArguments=$true)]
     [Parameter(ParameterSetName="FilePathComputerName",Mandatory=$false,ValueFromRemainingArguments=$true)]
     [Parameter(ParameterSetName="LiteralFilePathComputerName",Mandatory=$false,ValueFromRemainingArguments=$true)]
@@ -133,9 +131,9 @@ begin {
 process {
     $Job=New-Object PoShAdmin.Job -ArgumentList $Name;
     $null=$Job.PowerShell.AddScript($ScriptBlock)
-#    if ($InputObject) {
-#        $null=$Job.PowerShell.AddParameter("input",$InputObject)
-#    }
+    if ($InputObject) {
+        $job.InputObject=$InputObject
+    }
     foreach($argument in $ArgumentList) {
         $null=$Job.PowerShell.AddArgument($argument)
     }

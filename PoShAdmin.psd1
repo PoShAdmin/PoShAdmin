@@ -13,7 +13,7 @@
 #RootModule = 'PoShAdmin.DLL'
 
 # Version number of this module.
-ModuleVersion = '1.2'
+ModuleVersion = '1.1'
 
 # ID used to uniquely identify this module
 GUID = 'e03541ba-42b3-4de5-b8d8-b3907850420c'
@@ -64,16 +64,16 @@ RequiredAssemblies = @("PoShAdmin.DLL")
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-FormatsToProcess = @("PoShAdmin.ps1xml")
+FormatsToProcess = @("PoShAdmin.format.ps1xml")
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 NestedModules = @("PoShAdmin.psm1","PoShAdmin.DLL")
 
 # Functions to export from this module
-FunctionsToExport = '*-PoSh*'
+FunctionsToExport = @('*-PoSh*','Get-ComputerName')
 
 # Cmdlets to export from this module
-# CmdletsToExport = '*'
+CmdletsToExport = '*-PQ*'
 
 # Variables to export from this module
 # VariablesToExport = '*'

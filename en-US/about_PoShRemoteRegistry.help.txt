@@ -1,0 +1,11 @@
+﻿TOPIC
+    about_PoShRemoteRegistry
+
+SHORT DESCRIPTION
+    Provides an easy way to query and set registry values on remote computers.
+
+LONG DESCRIPTION
+    This topic will explain how to use the PoShAdmin Remote Registry features.
+    
+SEE ALSO
+   about_PoShAdmin

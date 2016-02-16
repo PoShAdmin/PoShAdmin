@@ -1,0 +1,15 @@
+﻿TOPIC
+    about_PoShGUI
+
+SHORT DESCRIPTION
+    Provides a graphical interface for the Parallel Queue engine and the 
+    distributed Parallel Execution Engine (PExE).
+
+LONG DESCRIPTION
+    This topic will explain the options of the PoShAdmin graphical user
+    interface.
+    
+SEE ALSO
+   about_PoShAdmin
+   about_PQJobs
+   about_PoShPixies

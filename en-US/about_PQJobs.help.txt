@@ -1,0 +1,248 @@
+﻿TOPIC
+    about_PQJobs
+
+SHORT DESCRIPTION
+    Provides informatio about how PoShAdmin Parallel Queue engine runs a command
+    in the background without interacting with the current session. 
+
+LONG DESCRIPTION
+    This topic explains how to run Parallel Queue background jobs on a local or
+    remote computer.
+    
+    When you add a PQJob, the command prompt returns immediately, even if the
+	job cannot be started immediately or it takes an extended time to complete.
+	You can continue to work in the session without interruption while the job is
+	scheduled and it runs. 
+
+	
+THE PQ JOB CMDLETS
+
+    Add-PQJob			Adds a PQJob to the main queue and schedules running as soon
+						as possible.
+
+    Get-PQResult		Gets the results of PQJobs.
+
+    Get-PQSettings		Gets global Parallel Queue settings.
+
+    Set-PQSettings		Sets global Parallel Queue settings.
+
+    Get-PQStatus		Gets the status of the Parallel Queue including queue error
+						messages.
+
+    Clear-PQueue		Clears the main Parallel Queue.
+	
+	Get-PQueue			Returns the list of jobs in the main Parallel Queue.
+	
+	Remove-PQJob		Kills a PQJob and removes it from the Parallel Queue.
+
+    Get-ComputerName	Reads a list of hostnames from a file and turn them into
+						input for Add-PQJob
+
+						
+HOW TO START A PQJOB ON THE LOCAL COMPUTER
+
+    To add a PQJob to the Parallel Queue, use the Add-PQJob cmdlet. This will
+	schedule the job to run as soon as the Parallel Queue has free threads to
+	run it. It will automatically start the job.
+	
+    To write an Add-PQJob command, enclose the command that the job runs in 
+    braces ( { } ). Use the ScriptBlock parameter to specify the command.
+
+    The following command adds a PQJob to the queue that runs a Get-Process
+	command on the local computer.
+
+        Add-PQJob -ScriptBlock {Get-Process}
+
+
+    The Add-PQJob command returns an object that represents the job. The job 
+    object contains useful information about the job and it contains the jobs
+	result after execution.
+    
+    Save the job object in a variable, and then use it with the other PoShJob 
+    cmdlets to manage the background job. The following command adss a PQJob 
+    object and saves the resulting job object in the $job variable.
+
+        $job = Add-PQJob -ScriptBlock {Get-Process}
+
+		
+HOW TO START A PQJOB ON A REMOTE COMPUTER
+
+	When adding a PQJob for a remote computer, the PQJob is added to the local
+	Parallel Queue. Running of the job is managed by the local computer and it
+	will only start execution if the local computer has enough threads to start
+	the job. If only remote commands are executed in a session, the number of
+	maximum threads can be increased using the Set-PQSettings cmdlet as the
+	resource usage of remote executions is somewhat lighter than as of local
+	executions.
+	
+	Remote execution is triggered when Add-PQJob is invoked with the -ComputerName
+	property.
+	
+	The following command adds a PQJob to the queue that executes remotely on
+	"computer1" and retrieves the running processes on that computer.
+	
+		Add-PQJob -ComputerName computer1 -ScriptBlock {Get-Process}
+
+	The PoShAdmin Parallel Queue uses WinRM to connect to remote computers.
+	WinRM needs to be set up before remote commands can be executed.
+	
+	The following command uses the HTTP protocol in WinRM to connect to the
+	remote computer instead of the default HTTPS protocol. The computers need
+	to be set up using the HTTP protocol in WinRM for this to work.
+	
+		Add-PQJob -ComputerName computer1 -ScriptBlock {Get-Service} -HTTP
+	
+	
+GETTING JOB OBJECTS AND THE RESULTS OF A JOB
+
+	Contrary to the built-in background job execution of PowerShell, it is not
+	necessary to retrieve the job objects for a PoShAdmin PQJob execution for the
+	following reasons:
+	
+	Add-PQJob returns a PQJob object, if the user explicitly wants to keep the
+	object for easy access. However this is not required.
+	
+	The Get-PQResult command will retrieve all finished PQJob objects. Using
+	its built-in filter switches the retrieval can be filtered but by default
+	all finished PQJob objects are retrieved together with the results of the
+	execution.
+	
+	Any frozen or long running PWJob executions are killed by the Parallel Queue
+	Engine after a set amount of time. This timeout value is 120 seconds by default
+	but it can be modified using the Set-PQSettings cmdlet. All PQJobs that timed
+	out will be retrieved using the Get-PQResult cmdlet together with other finished
+	jobs.
+	
+	So eventually all PQJobs will show up again by polling results using the
+	Get-PQSettings cmdlet, regardless of success of execution. This way it is not
+	required to store and manage the running jobs. The Parallel Queue Engine takes
+	care of managing the jobs until results are received.
+	
+    The job object contains the state of the job, which indicates whether the 
+    job has finished. A finished job has a state of "Completed" or "Failed" or
+	"TimedOut". A job might also be NotStarted or Running. The job object contains
+	the "Output" property which fills up as the job executes and at the end it
+	contains the result of the execution.
+
+Get-PQResult
+
+		ComputerName Tag State     Output
+		------------ --- -----     ------
+		   computer1     Completed {System.Diagnostics.Process (Applicat...
+
+
+PARTIAL JOB RESULTS
+
+	When you schedule a PQJob, the results do not appear immediately.
+	Instead the Add-PQJob cmdlet returns a job object that represents the job and
+	it contains a property for the results so far. To get partial results for a
+	PQJob, read this property.
+	
+	Contrary to the builtin in PowerShell Receive-Job cmdlet, the reading of the
+	PQJob Output property does not erase the property content. The Output property
+	will always contain all results received so far.
+	
+	The below commands will run a PQJob that prints "Start" then waits 60 seconds
+	and prints "End". You will see that while the job is running the partial output
+	is already accessible.
+	
+> $job=Add-PQJob -ScriptBlock {"Start";Start-Sleep 60;"End"}
+
+(after 30 seconds)
+
+> $job.Output
+Start
+
+(after 60 seconds)
+
+> $job.Output
+Start
+End
+
+> Get-PQResult
+
+		ComputerName Tag State     Output       Error InputObject ArgumentList NamedParameters
+		------------ --- -----     ------       ----- ----------- ------------ ---------------
+				   .     Completed {Start, End} {}    {}          {}           {}
+
+				   
+WAITING FOR THE RESULTS
+
+	Since the PoShAdmin Parallel Queue Engine manages the running of the PQJobs,
+	there is no need to manage them from our scripts. It is enough to call
+	Get-PQResult once in a while in our code and the results will emerge as soon
+	as the jobs finish.
+	
+	The Get-PQStatus cmdlet will give a peek into how the Parallel Queue Engine
+	is doing. It returns details about how many jobs are running, how many are
+	in the queue and how many have finished but haven't been retrieved by
+	Get-PQResult.
+	There is no need to poll the queue using Get-PQStatus for finished jobs as
+	this command needs to momentarily stop the managing of jobs while the values
+	are read. In a custom script, poll the job queue by Get-PQResult which will
+	also read the output in one go if there are results.
+	
+	For debugging purposes the Get-PQueue cmdlet returns all job objects in the
+	main queue. These are the job objects that are scheduled to run, are currently
+	running or just finished but haven't been moved to the results queue yet.
+	Moving finished jobs to the results queue takes "one tick" of the Parallel
+	Queue Engine which is around 1 second. All jobs in the result queue can be
+	returned by the Get-PQResult cmdlet.
+
+	
+STOPPING A PQJOB
+
+	All PQJobs in the queue are subject to the global Queue Timeout set by
+	Set-PQSettings so usually there's no point in stopping one specific job.
+	
+	For debugging purposes the Remove-PQJob cmdlet can be used to stop a
+	specific job. This will also remove the job from the main queue and move
+	it over to the results queue so it can be retrieved by Get-PQResult.
+
+DELETING A JOB
+
+	The Get-PQResult cmdlet will automatically relieve the Parallel Queue Engine
+	from managing the job. It will remove it from all queues and release the
+	resources it was using. Usually a script writer doesn't need to worry about
+	deleting a job.
+	
+	For debugging purposes the Remove-PQJob cmdlet can be used to stop a
+	specific job. This will also remove the job from the main queue and move
+	it over to the results queue so it can be retrieved by Get-PQResult.
+	
+	If necessary, the correct way to delete a job is to run Remove-PQJob and
+	then Get-PQResult.
+
+INVESTIGATING A FAILED JOB
+
+	To find out why a job failed, use the Error property of the job object.
+
+	The following command starts a remote job on a non-existent machine.
+	It saves the job in the $job variable.
+	
+$job=Add-PQJob -ComputerName computer1 -ScriptBlock {Get-Process}
+
+$job
+
+ComputerName Tag State  Output Error
+------------ --- -----  ------ -----
+   computer1     Failed {}     {Connecting to remote server computer1 failed with the following error message : The ...
+
+	The following command gets the first error returned by the execution:
+	
+$job.Error[0]
+Connecting to remote server computer1 failed with the following error message : The WinRM client cannot process the request because the server name cannot be resolved. For more information, see the about_Remote_Troubleshooting Help topic.
+    + CategoryInfo          : InvalidArgument: (computer1:String) [], PSRemotingTransportException
+    + FullyQualifiedErrorId : Connecting to remote server computer1 failed with the following error message : The WinRM client cannot process the request because the server name cannot be resolved. For more information, see the about_Remote_Troubleshooting Help topic.
+
+SEE ALSO
+   about_PoShAdmin
+   Add-PQJob
+   Get-PQResult
+   Get-PQSettings
+   Set-PQSettings
+   Get-PQStatus
+   Clear-PQueue
+   Get-PQueue
+   Remove-PQJob
+   Get-ComputerName

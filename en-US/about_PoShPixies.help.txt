@@ -1,0 +1,15 @@
+﻿TOPIC
+    about_PoShPixies
+
+SHORT DESCRIPTION
+    Provides a distributed Parallel Execution Engine (PExE). Pixies are Windows
+    services running on central computers with low latency connections to the
+    managed computers. They use WinRM to run remote commands on the machines.
+
+LONG DESCRIPTION
+    This topic will explain how to run PoShAdmin Pixies in your environment.
+    
+SEE ALSO
+   about_PoShAdmin
+   about_PQJobs
+   about_PoShPixies
